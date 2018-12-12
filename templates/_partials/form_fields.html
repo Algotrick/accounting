@@ -1,0 +1,15 @@
+
+{% if return_url %}
+<input type="hidden" name="_return_url" value="{{ return_url }}">
+{% endif %}
+
+{% for field in form %}
+    {% if form %}
+        <div class="form-group">
+            <label class="control-label control-label-block" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+    {% else %}
+            {{ field }}
+    {% endif %}
+{% endfor %}

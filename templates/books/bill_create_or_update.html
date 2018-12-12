@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% load static introspection_filters %}
+
+{% block head %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Create a {{ form|get_form_model_verbose_name }}</h1>
+
+    <form action="." method="post" class="form">
+        {% csrf_token %}
+
+        {% include "_partials/form_fields.html" with form=form %}
+
+        <h2 class="page-header">Content</h2>
+        {{ line_formset.management_form }}
+        {{ line_formset.non_field_errors }}
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th>#</th>
+                <th>Label</th>
+                <th>Description</th>
+                <th>Unit (excl. tax)</th>
+                <th>Qt.</th>
+                <th>Tax rate</th>
+                <th>Total</th>
+            </thead>
+            <tbody>
+            {% for line_form in line_formset %}
+                <tr class="formset-form">
+                    <td class="col-md-0 counter">
+                        {{ forloop.counter }}
+                        {{ line_form.id }}
+                    </td>
+                    <td class="col-md-2">
+                        {{ line_form.label }}
+                    </td>
+                    <td class="col-md-4">
+                        {{ line_form.description }}
+                    </td>
+                    <td class="col-md-2">
+                        {{ line_form.unit_price_excl_tax }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ line_form.quantity }}
+                    </td>
+                    <td class="col-md-1">
+                        {{ line_form.tax_rate }}
+                    </td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+            <button type="submit" class="btn btn-success">
+                Create
+            </button>
+    </form>
+{% endblock content %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'accounting/js/jquery.formset.js' %}"></script>
+    <script src="{% static 'accounting/js/books/invoice_or_bill_create.js' %}"></script>
+{% endblock %}
