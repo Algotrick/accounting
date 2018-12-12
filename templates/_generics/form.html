@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+    {% if object.pk %}
+        <h1 class="page-header">Edit a </h1>
+    {% else %}
+        <h1 class="page-header">Create a </h1>
+    {% endif %}
+
+    <form action="." method="post" class="form">
+        {% csrf_token %}
+
+        {% include "_partials/form_fields.html" with form=form %}
+
+            <button type="submit" class="btn btn-success">
+                {% if object.pk %}
+                     Save changes
+                {% else %}
+                     Send creation
+                {% endif %}
+            </button>
+    </form>
+{% endblock content %}
