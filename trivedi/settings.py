@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'accounting.people',
     'accounting.reports',
     'django_select2',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -152,3 +154,16 @@ STATICFILES_DIRS = [
 ]
 
 ACCOUNTING_DEFAULT_CURRENCY = 'INR'
+
+REST_FRAMEWORK = {
+   'PAGINATE_BY': 10,
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.BasicAuthentication',
+       'rest_framework.authentication.SessionAuthentication',
+       'rest_framework.authentication.TokenAuthentication',
+       #'rest_framework_oauth.authentication.OAuth2Authentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES' : (
+       'rest_framework.permissions.IsAuthenticated',
+   )
+}

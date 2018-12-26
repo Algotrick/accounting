@@ -24,6 +24,7 @@ urlpatterns = [
     path('books/', include('accounting.books.urls', namespace="books")),
     path('people/', include('accounting.people.urls', namespace="people")),
     path('report/', include('accounting.reports.urls', namespace="reports")),
+    path('api/', include('api.urls', namespace="api"))
 
 ]
 

@@ -187,8 +187,9 @@ class AbstractSale(CheckingModelMixin, models.Model):
     @property
     def total_paid(self):
         total = D('0')
-        for p in self.payments.all():
-            total += p.amount
+        print (self, "hello")
+        # for p in self.payments.all():
+        #     total += p.amount
         return total
 
     @property
